@@ -16,7 +16,7 @@ from PIL import Image
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO, datefmt='%H:%M:%S')
 
 gui = tk.Tk()
-gui.title("Pobieranie cen")
+gui.title("Getting prices")
 
 #centering window
 window_height = 350
@@ -103,7 +103,7 @@ def done():
 
     #getting colors id and names list
     color_values = []
-    with open("kolory.txt", "r") as f:
+    with open("./bricklinkScrapper/colors.txt", "r") as f:
         for i in range(0,200):
             text = f.readline()
             color_id = int(text.replace("\n","").split()[0])
@@ -149,11 +149,11 @@ def done():
             final_url = start_url + lego_type + '=' + lego_id + '&C=' + brick_color_id + '#T=P&C=' + brick_color_id
 
         bricks_urls.append(final_url)
-        logging.info(f'sprawdzanie klocka o id: {lego_id}, link do strony klocka: {final_url}')
+        logging.info(f'checking brick with id: {lego_id}, url to brick\' site {final_url}')
 
         #reading bricks data from "price guide"
 
-        logging.info(f'Pobieranie danych z zakładki "price guide"')
+        logging.info(f'Getting data from "price guide"')
 
         driver = webdriver.Firefox(options=options)
         driver.get(final_url)
@@ -213,7 +213,7 @@ def done():
         #reading bricks data from "items for sale"
 
 
-        logging.info(f'Pobieranie danych z zakładki "items for sale"')
+        logging.info(f'Getting data from "items for sale"')
 
         locations = ['"loc":"PL",', '"reg":"-1",']
         for location in locations:
@@ -333,32 +333,32 @@ def done():
         img_list.append("")
 
 
-    logging.info(f'Generowanie pliku do zapisania w programie excel.')
+    logging.info(f'Generating file to save in excel.')
 
     #setting data to save in .csv file
     data = {
-        "Zdjęcie produktu" : img_list,
-        "ID klocka/minifigurki" : k_or_m_id,
-        "Link do strony klocka" : bricks_urls,
-        "kolor klocka" : lego_color_name,
-        "ilość klocków/minifigurek" : k_or_m_quantity,
-        "dostępność": available,
-        "średnia sprzedaży z ostatnich 6 miesięcy": last_6_months_avg,
-        "minimum sprzedaży z ostatnich 6 miesięcy": last_6_months_min,
-        "maksimum sprzedaży z ostatnich 6 miesięcy": last_6_months_max,
-        "średnia sprzedawania aktualnego": now_avg,
-        "minimum sprzedawania aktualnego": now_min,
-        "maksimum sprzedawania aktualnego": now_max,
-        "średnia w polsce": poland_avg,
-        "minimum w polsce": poland_min,
-        "maksimum w polsce": poland_max,
-        "średnia w unii europejskiej": eu_avg,
-        "minimum w unii europejskiej": eu_min,
-        "maksimum w unii europejskiej": eu_max,
-        "liczebność*średnia 6miesięczna": quantity_6months,
-        "liczebność*średnia PL": quantity_pl,
-        "liczebność*średnia EU": quantity_eu,
-        "liczebność * średnia światowa": quantity_all
+        "Product\'s img" : img_list,
+        "Brick/minifigure id" : k_or_m_id,
+        "Url to brick\'s site" : bricks_urls,
+        "Brick\'s color" : lego_color_name,
+        "Number of bricks/minifigures" : k_or_m_quantity,
+        "Availability": available,
+        "Average price from last 6 months": last_6_months_avg,
+        "Minimum price from last 6 months": last_6_months_min,
+        "Maksimum price from last 6 months": last_6_months_max,
+        "Average price of current sales": now_avg,
+        "Minimum price of current sales": now_min,
+        "Maksimum price of current sales": now_max,
+        "Average price in Poland": poland_avg,
+        "Minimum price in Poland": poland_min,
+        "Maksimum price in Poland": poland_max,
+        "Average price in EU": eu_avg,
+        "Minimum price in EU": eu_min,
+        "Maksimum price in EU": eu_max,
+        "num * average price from 6 months": quantity_6months,
+        "num * average price in Poland": quantity_pl,
+        "num * average price in EU": quantity_eu,
+        "num * average world price": quantity_all
     }
 
     df = pd.DataFrame(data)
@@ -367,7 +367,7 @@ def done():
     df2 = df.sum(numeric_only=True)
     df2 = pd.DataFrame(df2)
     df_transposed = df2.transpose()
-    columns = ["Zdjęcie produktu","ID klocka/minifigurki","kolor klocka","Link do strony klocka","ilość klocków/minifigurek","dostępność"]
+    columns = ["Product\'s img","Brick/minifigure id","Brick\'s color","Url to brick\'s site","Number of bricks/minifigures","Availability"]
     df_transposed.loc[0,columns] = "-"
     vertical = pd.concat([df, df_transposed])
 
@@ -377,7 +377,7 @@ def done():
     writer = pd.ExcelWriter(finalpath + "/" + filename, engine='xlsxwriter')
 
     os.chdir(finalpath)
-    vertical.to_excel(writer, sheet_name='Podsumowanie', index=False)
+    vertical.to_excel(writer, sheet_name='summary', index=False)
 
     #formating photos
     for img_id in id_list:
@@ -385,7 +385,7 @@ def done():
         image = image.convert('RGB')
         image.thumbnail((100, 100))
         image.save(path + "/" + str(img_id) + ".jpg")
-        worksheet = writer.sheets['Podsumowanie']
+        worksheet = writer.sheets['summary']
 
         worksheet.insert_image("A" + str(img_id), path + "/" + str(img_id) + ".jpg")
 
@@ -393,13 +393,13 @@ def done():
         worksheet.set_default_row(75)
         worksheet.set_row(0, 16.5)
     writer.close()
-    logging.info(f'Plik został zapisany.')
+    logging.info(f'The file has been saved.')
     shutil.rmtree(path)
-    status_label.config(text="Plik został zapisany, można zamknąć program.")
+    status_label.config(text="The file has been saved, you can close the program.")
 
 file_selection_button = tk.Button(
     gui,
-    text = "Wybierz plik z którego zostanie pobrana lista produktów",
+    text = "Select the file from which the product list will be downloaded(.XML)",
     bg = "gray",
     command = select_file,
     )
@@ -414,20 +414,20 @@ file_selection_label.pack()
 
 brick_status_selection_label = tk.Label(
     gui,
-    text="Klocki mają być używane, czy nowe?"
+    text="Should the bricks be used or new?"
     )
 brick_status_selection_label.pack()
 brick_status_selection_chosen = tk.IntVar(value=1)
 brick_status_selection_yes = tk.Radiobutton(
     gui,
-    text="Używane",
+    text="Used",
     variable=brick_status_selection_chosen,
     value=1
     )
 brick_status_selection_yes.pack(fill=tk.X)
 brick_status_selection_no = tk.Radiobutton(
     gui,
-    text="Nowe",
+    text="New",
     variable=brick_status_selection_chosen,
     value=2
     )
@@ -437,7 +437,7 @@ brick_status_selection_no.pack(fill=tk.X)
 
 sleep_time_label = tk.Label(
     gui,
-    text = "Podaj czas oczekiwania na otwarcie stron (w sekundach)",
+    text = "Enter the waiting time for pages to open (in seconds)",
     )
 sleep_time_label.pack()
 sleep_time_entry = tk.Entry(
@@ -448,23 +448,23 @@ sleep_time_entry.pack(fill=tk.X)
 
 imgfolder_location_label = tk.Label(
     gui,
-    text = "Podaj miejsce utworzenia tymczasowego folderu  ",
+    text = "Specify where to create the temporary folder  ",
     )
 imgfolder_location_label.pack()
 imgfolder_location_label2 = tk.Label(
     gui,
-    text = "przechowującego zdjęcia, po zapisaniu pliku zostanie on usunięty",
+    text = "to store photos, after saving the file it will be deleted",
     )
 imgfolder_location_label2.pack()
 imgfolder_location_entry = tk.Entry(
     gui,
     )
-imgfolder_location_entry.insert(0,r"C:\Users\USER\Desktop")
+imgfolder_location_entry.insert(0,r"C:\\Users\\USER\\Desktop")
 imgfolder_location_entry.pack(fill=tk.X)
 
 end_location_label = tk.Label(
     gui,
-    text = "Podaj miejsce zapisu pliku końcowego",
+    text = "Specify where to save the final file",
     )
 end_location_label.pack()
 final_location_entry = tk.Entry(
@@ -475,7 +475,7 @@ final_location_entry.pack(fill=tk.X)
 
 file_name_label = tk.Label(
     gui,
-    text = "Podaj nazwe pliku końcowego",
+    text = "Enter the name of the final file",
     )
 file_name_label.pack()
 file_name_entry = tk.Entry(
@@ -486,7 +486,7 @@ file_name_entry.pack(fill=tk.X)
 
 done_button = tk.Button(
     gui,
-    text = "Zatwierdź wprowadzone dane",
+    text = "Confirm entered data",
     bg = "gray",
     command = done,
     )
