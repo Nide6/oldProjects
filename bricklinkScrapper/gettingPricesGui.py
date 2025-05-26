@@ -20,7 +20,7 @@ gui.title("Getting prices")
 
 #centering window
 window_height = 350
-window_width = 350
+window_width = 370
 
 screen_width = gui.winfo_screenwidth()
 screen_height = gui.winfo_screenheight()
