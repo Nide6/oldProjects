@@ -1,25 +1,19 @@
-
-/**
- * @interface Punkt jet to punkt
- */
-interface Punkt {
+interface Point {
     x:number
     y:number
 }
 /**
- * @class Operations odpowiada za operacje i dane przekazywane między plikami
- * @param selected lista zaznaczonych pól
- * @param change numer zmiany
- * @param paste informacja czy wklejamy coś
+ * @param selected list of selected fields
+ * @param change number of current changes
  */
 class Operations {
-    public selected:Array<Punkt>
+    public selected:Array<Point>
     chngArray: Array<string>
     change: number
     canvas:HTMLCanvasElement
     ctx: CanvasRenderingContext2D
     paste: boolean
-    ids: Array<Punkt>
+    ids: Array<Point>
     painting: boolean
     
     constructor(){
@@ -31,8 +25,7 @@ class Operations {
         this.change = -1
         this.canvas = document.getElementById('mapCanvas') as HTMLCanvasElement
         this.ctx =  this.canvas.getContext('2d')
-    }
-    
+    }   
     addChange(){
         this.change+=1
         while(this.change<this.chngArray.length){
@@ -50,9 +43,6 @@ class Operations {
         }
         this.chngArray.push(link)
     }
-    /**
-     * @function arraycheck takie gówno do sprawdzania zawartości tablicy
-     */
     arraycheck(){
         console.log(this.chngArray)
     }
