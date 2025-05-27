@@ -3,7 +3,7 @@
 Language: typescript  
 To run it use "npm run dev" in mapGenerator directory
 
-Functions:
+Functions:  
   right click -> open menu with available options  
   ctrl+c -> copy  
   ctrl+x -> cut  
