@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generator map</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./dist/main.bundle.js" type="module"></script>
+</head>
+<body oncontextmenu="return false;">
+    <div id="prostokat"></div>
+    <div id="data">
+        <img id="sprite" src="./sprites.png" width="1536" height="960">
+    </div>
+    <div id="items">
+        <h1>items</h1>
+    </div>
+    <div id="map">
+        <input type="file", style="display: none;", id="file">
+        <h1 id="mapText">map auto-<input type="checkbox" id="auto"></h1>
+        <canvas id="mapCanvas"></canvas>
+        <canvas id="testCanvas" style="display: none;"></canvas>
+        <div id="hidder"></div>
+        <div id="hidder2"></div>
+    </div>
+    <div id='menu'>
+        <button id="paste">paste</button><button id="copy">copy</button><button id="cut">cut</button><button id="undo">undo</button><button id="redo">redo</button><a href="#" id="download">download</a><button id="load">load from file</button>
+    </div>
+</body>
+</html>

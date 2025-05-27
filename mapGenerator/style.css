@@ -1,0 +1,92 @@
+*{
+    margin:0px;
+    touch-action: none;
+}
+body{
+    display:flex;
+    background-color: black;
+}
+#items{
+    background-color: black;
+    height:1040px;
+    color:white;
+    text-align: center;
+    padding:5px;
+    position:relative
+}
+#map{
+    background-color: black;
+    padding:5px;
+    color:white;
+    text-align: center;
+    width:375px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+.row{
+    display:flex;
+    flex-direction: row;
+}
+.item{
+    box-sizing: border-box;
+}
+.mapItem{
+    box-sizing: border-box;
+}
+#data{
+    display:none;
+}
+#itemsCanvas{
+    width:400px;
+}
+#mapCanvas{
+    height:500px;
+    width: 375px;
+}
+#testCanvas{
+    position: absolute;
+    top: 43px;
+    left: 30px;
+    height:500px;
+    width: 375px;
+}
+.selected{
+    box-sizing: border-box;
+}
+#mapText{
+    width:375px
+}
+#prostokat{
+    position: absolute;
+    background-color: red;
+    z-index: 1000000000;
+}
+#menu{
+    position: absolute;
+    top: 100px;
+    left:330px;
+    width:150px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: red;
+    display: none;
+}
+#hidder{
+    background-color: black;
+    height:500px;
+    width:730px;
+    z-index: 0;
+    position: absolute;
+    top:541px
+}
+#hidder2{
+    background-color: black;
+    height:800px;
+    width:355px;
+    z-index: 0;
+    position: absolute;
+    left:378px
+}
