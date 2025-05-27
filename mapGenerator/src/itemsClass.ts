@@ -1,23 +1,10 @@
 import {operations} from "./index"
 
-/**
- * @interface Punkt no punkt jest punkt
- */
-interface Punkt {
+interface Point {
     x: number
     y: number
 }
-/**
- * @class Item to clasa odpowiadająca za item
- * @param canvas to jest canvas
- * @param img to jest grafika
- * @param ctx to jest takie gówno do renderowania
- * @param map to jest div o id map
- * @param elem to jest div przypisany do tej klasy
- * @param x to jest cyfra
- * @param y to jest cyfra
- * @param auto zakładam, że mercedes to to nie jest
- */
+
 class Item {
     canvas: HTMLCanvasElement
     img: HTMLImageElement
@@ -84,22 +71,17 @@ class Item {
         this.map.appendChild(this.elem)
     }
 
-    setPosition(punkt: Punkt) {
+    setPosition(point: Point) {
         this.elem.style.width = '24.2px'
         this.elem.style.height = '24.3px'
-        this.elem.style.left = `${5.6 + punkt.x * 24 + punkt.x * 0.96}px`
-        this.elem.style.top = `${43 + punkt.y * 24 + punkt.y * 0.96}px`
-        this.elem.id = `item:${punkt.x}:${punkt.y}`
+        this.elem.style.left = `${5.6 + point.x * 24 + point.x * 0.96}px`
+        this.elem.style.top = `${43 + point.y * 24 + point.y * 0.96}px`
+        this.elem.id = `item:${point.x}:${point.y}`
     }
-    /**
-     * @function setCanvasPosition czemu tego nie połączyć z setPosition(), nie wiem, chociaż wiem, bo mi sie nie chce
-     * @param punkt punk to punkt ale nie taki na mapie
-     */
-    setCanvasPosition(punkt: Punkt) {
-        this.x = punkt.x
-        this.y = punkt.y
+    setCanvasPosition(point: Point) {
+        this.x = point.x
+        this.y = point.y
     }
-
     setImg(img: HTMLImageElement) {
         this.img = img
     }

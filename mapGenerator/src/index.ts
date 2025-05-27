@@ -1,14 +1,8 @@
-/**
- * @module Item modul od itemów
- * @module MapItem modul od itemów mapy
- * @module Operations takie modół do przekazywania danych między plikami i paru funkcji których nie chciało mi się tutaj pchać
- */
-
 import Item from "./itemsClass"
 import MapItem from "./mapClass"
 import Operations from "./operationsClass"
 
-interface Punkt {
+interface Point {
     x:number
     y:number
 }
@@ -21,24 +15,21 @@ export let moved = false
 let moving = false
 let x = 0 as number
 let y = 0 as number
-const moseMoveShit = document.getElementById('prostokat') as HTMLDivElement
+const selectedRectangle = document.getElementById('prostokat') as HTMLDivElement
 
 /**
- * @event contextmenu pokazuje menu pod prawym klawiszem
+ * showing and hiding menu
  */
 document.addEventListener('contextmenu', function(){
     document.getElementById('menu').style.display='flex'
 })
-/**
- * @event click chowa menu
- */
 document.getElementsByTagName('body')[0].addEventListener('click',function(){
     document.getElementById('menu').style.display='none'
 })
 
 /**
- * @event mousedown dodanie zaznaczenia kilku pól
- * @param e sprawdzamy który klawisz wciśnięty
+ * adding the option to select multiple points
+ * connected with mousemove and mouseup events
  */
 document.addEventListener('mousedown', function (e) {
     console.log(e.which==1)
@@ -47,10 +38,10 @@ document.addEventListener('mousedown', function (e) {
         e.preventDefault()
         x = e.pageX
         y = e.pageY
-        moseMoveShit.style.left = `${e.pageX}px`
-        moseMoveShit.style.top = `${e.pageY}px`
-        moseMoveShit.style.width = "0px"
-        moseMoveShit.style.height = "0px"
+        selectedRectangle.style.left = `${e.pageX}px`
+        selectedRectangle.style.top = `${e.pageY}px`
+        selectedRectangle.style.width = "0px"
+        selectedRectangle.style.height = "0px"
         if (!e.ctrlKey && !e.metaKey) {
             const selected = document.getElementsByClassName('selected') as HTMLCollectionOf<HTMLElement>
             Array.from(selected).forEach(element => {
@@ -63,11 +54,7 @@ document.addEventListener('mousedown', function (e) {
         }
     }
 })
-/**
- * @param e ktury klawisz wciśnięty?
- * @returns nic
- * @todo gówno a nie todo - projekt skończony
- */
+
 document.addEventListener('keydown', function(e){
     e.preventDefault()
     if(e.key == 'Delete'){
@@ -97,20 +84,15 @@ document.addEventListener('keydown', function(e){
         loadF()
     }
 })
-/**
- * @event mouseup co sie stanie jak puszcze klawisz na myszce???
- * @todo sprawdź se jak to działa
- */
+
 document.addEventListener("mouseup", function moseUp() {
     if(!operations.paste){
-
         setTimeout(() => {
-            
             moving = false
             if (moved) {
                 moved = false
                 let divs = document.getElementsByClassName('mapItem') as HTMLCollectionOf<HTMLElement>
-                const div2 = moseMoveShit.getBoundingClientRect()
+                const div2 = selectedRectangle.getBoundingClientRect()
                 for (let i = 0; i < divs.length; i += 1) {
                     const div1 = divs[i].getBoundingClientRect()
                     if (div1.left < div2.right && div1.right > div2.left && div1.top < div2.bottom && div1.bottom > div2.top) {
@@ -132,21 +114,15 @@ document.addEventListener("mouseup", function moseUp() {
                             let y = 1 + 49 * Number(divs[i].id.split(':')[2])
                             operations.selected.push({ x: x, y: y })
                         }
-                        // console.log(divs[i])
-                        // console.log(divs[i].id.split(':'))
-                        // console.log(operations.selected)
                     }
                 }
             }
-            moseMoveShit.style.width = "0px"
-            moseMoveShit.style.height = "0px"
+            selectedRectangle.style.width = "0px"
+            selectedRectangle.style.height = "0px"
         }, 10);
     }
 })
 
-/**
- * @event mousemove co sie stanie jak ruszam myszką???
- */
 document.addEventListener('mousemove', function move(e) {
     if(!operations.paste){
 
@@ -154,33 +130,32 @@ document.addEventListener('mousemove', function move(e) {
             moved = true
             if (!e.ctrlKey && !e.metaKey) {
                 operations.selected = []
-                // console.log('nie')
             }
             if (e.pageX - x > 0) {
-                moseMoveShit.style.width = `${e.pageX - x}px`
+                selectedRectangle.style.width = `${e.pageX - x}px`
             } else {
                 if (e.pageX < 415) {
-                    moseMoveShit.style.left = `${415}px`
-                    moseMoveShit.style.width = `${x - 415}px`
+                    selectedRectangle.style.left = `${415}px`
+                    selectedRectangle.style.width = `${x - 415}px`
                 } else {
-                    moseMoveShit.style.left = `${e.pageX}px`
-                    moseMoveShit.style.width = `${x - e.pageX}px`
+                    selectedRectangle.style.left = `${e.pageX}px`
+                    selectedRectangle.style.width = `${x - e.pageX}px`
                 }
             }
             if (e.pageY - y > 0) {
-                moseMoveShit.style.top = `${y}px`
-                moseMoveShit.style.height = `${e.pageY - y}px`
+                selectedRectangle.style.top = `${y}px`
+                selectedRectangle.style.height = `${e.pageY - y}px`
             } else {
                 if (e.pageY < 43) {
-                    moseMoveShit.style.top = `${43}px`
-                    moseMoveShit.style.height = `${y - 43}px`
+                    selectedRectangle.style.top = `${43}px`
+                    selectedRectangle.style.height = `${y - 43}px`
                 } else {
-                    moseMoveShit.style.top = `${e.pageY}px`
-                    moseMoveShit.style.height = `${y - e.pageY}px`
+                    selectedRectangle.style.top = `${e.pageY}px`
+                    selectedRectangle.style.height = `${y - e.pageY}px`
                 }
             }
             let divs = document.getElementsByClassName('mapItem') as HTMLCollectionOf<HTMLElement>
-            const div2 = moseMoveShit.getBoundingClientRect()
+            const div2 = selectedRectangle.getBoundingClientRect()
             for (let i = 0; i < divs.length; i += 1) {
                 const div1 = divs[i].getBoundingClientRect()
                 if (div1.left < div2.right && div1.right > div2.left && div1.top < div2.bottom && div1.bottom > div2.top) {
@@ -193,10 +168,6 @@ document.addEventListener('mousemove', function move(e) {
     }
 })
 
-/**
- * @constant itemsCanvas no canvas no, co tu więcej napisać???
- * @todo nic
- */
 const itemsCanvas = document.createElement('canvas') as HTMLCanvasElement
 itemsCanvas.id = 'itemsCanvas'
 itemsCanvas.width = 785
@@ -206,10 +177,6 @@ itemCtx.rect(0, 0, 785, 1961)
 itemCtx.fillStyle = 'black'
 itemCtx.fill()
 
-/**
- * @function itemsGenerate no generujemy plansze z opcjami gównienek do narysowania
- * @todo zrób se kawe
- */
 async function itemsGenerate() {
     const img = await document.getElementById('sprite') as HTMLImageElement
     setTimeout(() => {
@@ -268,26 +235,18 @@ async function mapGenerate() {
         for (let j: number = 0; j <15; j += 1) {
             const item = new MapItem
             item.setImg(img)
-            item.draw()
             item.setPosition({ x: j, y: i })
         }
     }
 }
 
 mapGenerate()
-// map.appendChild(mapCanvas)
-
-console.log('selected', operations.selected)
-
-
-
 const downloader = document.getElementById('download') as HTMLAnchorElement
 mapCanvas.toBlob(function(blob){
     let url = URL.createObjectURL(blob)
     downloader.href = url
     downloader.download = 'mapa.png'
 })
-
 const load = document.getElementById('load')
 const file = document.getElementById('file') as HTMLInputElement
 file.accept = 'image/png'
@@ -311,10 +270,6 @@ function loadF(){
     document.getElementById('menu').style.display='none'
     file.click()
 }
-
-//undo redo
-// https://www.codicode.com/art/undo_and_redo_to_the_html5_canvas.aspx
-
 document.getElementById('undo').addEventListener('click', undo)
 function undo(){
     document.getElementById('menu').style.display='none'
@@ -346,7 +301,6 @@ function undo(){
         })
     }
 }
-
 document.getElementById('redo').addEventListener('click', redo)
 function redo(){
     document.getElementById('menu').style.display='none'
@@ -368,22 +322,18 @@ function redo(){
     }
 }
 
-
 const testCanvas = document.getElementById('testCanvas') as HTMLCanvasElement
 testCanvas.id = 'testCanvas'
 testCanvas.width = 736
 testCanvas.height = 980
 const testCtx = testCanvas.getContext('2d') as CanvasRenderingContext2D
-// testCtx.rect(0, 0, 736, 980)
-// testCtx.fillStyle = 'red'
-// testCtx.fill()
 let ready = false
 document.getElementById('copy').addEventListener('click', copy)
 function copy(){
     document.getElementById('menu').style.display='none'
     console.log('copy')
     if(operations.selected.length>0){
-        let ids = [] as Array<Punkt>
+        let ids = [] as Array<Point>
         ready = true
         testCtx.clearRect(0, 0, testCanvas.width, testCanvas.height);
         const imgData = mapCanvas.toDataURL('image/png')
@@ -393,42 +343,29 @@ function copy(){
         const y = Math.min(...operations.selected.map(elem=>elem.y))
         const idX = (Math.min(...operations.selected.map(elem=>elem.x))-1)/49
         const idY = (Math.min(...operations.selected.map(elem=>elem.y))-1)/49
-        console.log("test1",idX,idY)
         const pom = operations.selected
         newImage.onload = ()=>{
             for(let i=0; i<num; i+=1){
-                console.log("test",operations.selected)
                 testCtx.drawImage(newImage,pom[i].x,pom[i].y,47,47,pom[i].x-x,pom[i].y-y,47,47)
                 ids.push({x:(pom[i].x-1)/49-idX,y:(pom[i].y-1)/49-idY})
             }
             operations.ids = ids
         }
         newImage.src = imgData
-        console.log("testg",operations.selected)
-        // let copied = []
-        // for(let i=0; i<operations.selected.length; i+=1){
-        //     copied.push({x:operations.selected[i].x-x,y:operations.selected[i].y-y})
-        // }
         const selected = document.getElementsByClassName('selected') as HTMLCollectionOf<HTMLElement>
         Array.from(selected).forEach(function (element){
             element.className = 'mapItem'
             element.style.border = '1px solid white'
         })
-        
-        /**
-         * @constant copied huj wie coto jest ale bez teg sie wypierdala
-         */
-        //console.log(copied) //jak to usune to sie wypierdoli
-        console.log('hjhh')
+
         operations.selected=[]
     }
 }
 document.getElementById('cut').addEventListener('click',cut)
 async function cut(){
     document.getElementById('menu').style.display='none'
-    console.log('cut')
     if(operations.selected.length>0){
-        let ids=[] as Array<Punkt>
+        let ids=[] as Array<Point>
         ready = true
         testCtx.clearRect(0, 0, testCanvas.width, testCanvas.height);
         const imgData = mapCanvas.toDataURL('image/png')
@@ -460,20 +397,11 @@ async function cut(){
             })
         }
         newImage.src = imgData
-        console.log(operations.selected)
-        // let copied = []
-        // for(let i=0; i<operations.selected.length; i+=1){
-        //     copied.push({x:operations.selected[i].x-x,y:operations.selected[i].y-y})
-        // }
         const selected = document.getElementsByClassName('selected') as HTMLCollectionOf<HTMLElement>
         Array.from(selected).forEach(function (element){
             element.className = 'mapItem'
             element.style.border = '1px solid white'
         })
-        /**
-         * @constant copied huj wie coto jest ale bez teg sie wypierdala
-         */
-        //console.log(copied) //jak to usune to sie wypierdoli
         operations.selected=[]
     }
 }

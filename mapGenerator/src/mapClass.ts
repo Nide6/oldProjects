@@ -1,17 +1,10 @@
 import {operations, moved} from "./index"
 
-/**
- * @interface Punkt w aksjomatycznym ujęciu geometrii jedno z podstawowych pojęć pierwotnych[1]. W rozumieniu geometrycznym punkt jest obiektem bezwymiarowym, dlatego dwa punkty mogą się różnić co najwyżej położeniem. Punkty zaznacza się na rysunku jako × (krzyżyk), kółko lub kropkę i tradycyjnie oznacza wielkimi literami alfabetu łacińskiego
- */
-interface Punkt {
+interface Point {
     x: number
     y: number
 }
 
-/**
- * @class MapItem jest klasą
- * @todo zajeb głową o ściane
- */
 class MapItem {
     canvas: HTMLCanvasElement
     img: HTMLImageElement
@@ -35,7 +28,6 @@ class MapItem {
             let testCanvas = document.getElementById('testCanvas') as HTMLCanvasElement
             testCanvas.style.top = this.style.top
             testCanvas.style.left = this.style.left
-            // console.log(this.id.split(':'))
             if(operations.painting){
                 console.log('painting')
                 const reds = document.getElementsByClassName('mapItem') as HTMLCollectionOf<HTMLDivElement>
@@ -81,7 +73,6 @@ class MapItem {
                 }
                 newImage.src = testCanvas.toDataURL('image/png')
             } else if(!moved){
-
                 console.log('click')
                 if (e.ctrlKey || e.metaKey) {
                     if(this.elem.classList.contains('selected')){
@@ -110,26 +101,18 @@ class MapItem {
         })
         this.map.appendChild(this.elem)
     }
-
-    setPosition(punkt: Punkt) {
+    setPosition(point: Point) {
         this.elem.style.width = '24.2px'
         this.elem.style.height = '24.3px'
-        this.elem.style.left = `${5.6 + punkt.x * 24 + punkt.x * 0.96}px`
-        this.elem.style.top = `${43 + punkt.y * 24 + punkt.y * 0.96}px`
-        this.elem.id = `map:${punkt.x}:${punkt.y}`
-        this.x = 1 + 48 * punkt.x + punkt.x
-        this.y = 1 + 48 * punkt.y + punkt.y
+        this.elem.style.left = `${5.6 + point.x * 24 + point.x * 0.96}px`
+        this.elem.style.top = `${43 + point.y * 24 + point.y * 0.96}px`
+        this.elem.id = `map:${point.x}:${point.y}`
+        this.x = 1 + 48 * point.x + point.x
+        this.y = 1 + 48 * point.y + point.y
         console.log(this.x, this.y)
     }
-
     setImg(img: HTMLImageElement) {
         this.img = img
-    }
-    /**
-     * @function draw huj wie po co to jest ale wole nie usówać
-     */
-    draw() {
-        // this.ctx.drawImage(this.img,1,1,47,47,1079,1863,47,47)
     }
 }
 
