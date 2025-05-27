@@ -1,1 +1,12 @@
 # map generator
+### Project I've made in 2024, allows you to create map using a provided sprite.
+To run it use "npm run dev" in mapGenerator directory
+
+Functions:
+  right click -> open menu with available options
+  ctrl+c -> copy
+  ctrl+x -> cut
+  ctrl+z -> undo
+  ctrl+y -> reverse undo
+  ctrl+s -> save
+  ctrl+l -> load from image
