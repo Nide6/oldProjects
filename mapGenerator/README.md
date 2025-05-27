@@ -5,10 +5,10 @@ Language: typescript
 To run it use "npm run dev" in mapGenerator directory
 
 Functions:
-  right click -> open menu with available options
-  ctrl+c -> copy/n
-  ctrl+x -> cut\n
-  ctrl+z -> undo
-  ctrl+y -> reverse undo
-  ctrl+s -> save
+  right click -> open menu with available options  
+  ctrl+c -> copy  
+  ctrl+x -> cut  
+  ctrl+z -> undo  
+  ctrl+y -> reverse undo  
+  ctrl+s -> save  
   ctrl+l -> load from image
