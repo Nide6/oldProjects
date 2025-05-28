@@ -1,0 +1,19 @@
+{
+    "10": { "localization": 56, "reward": 11, "info": "You opened a tool shed and took an axe"},
+    "11": { "localization": 67, "reward": 12, "info": "You cut sticks for sheeplegs"},
+    "12": { "localization": 43, "reward": 13, "info": "You prepared legs for your fake sheep"},
+    "14": { "localization": 34, "reward": 15, "info": "The tavern owner paid you money"},
+    "15": { "localization": 37, "reward": 16, "info": "The cooper sold you a new barrel"},
+    "16": { "localization": 43, "reward": 17, "info": "You made a nice sheeptrunk"},
+    "18": { "localization": 36, "reward": 19, "info": "The butcher gave you wool"},
+    "19": { "localization": 43, "reward": 20, "info": "You prepared skin for your fake sheep"},
+    "21": { "localization": 57, "reward": 22, "info": "You used your tools to make a rag"},
+    "22": { "localization": 43, "reward": 23, "info": "You made a fake sheephead"},
+    "24": { "localization": 11, "reward": 25, "info": "You are digging..."},
+    "25": { "localization": 43, "reward": 26, "info": "You prepared a solid poison"},
+    "27": { "localization": 21, "reward": 28, "info": "You got a bucket full of tar"},
+    "28": { "localization": 43, "reward": 29, "info": "You prepared a liquid poison"},
+    "37": { "localization": 43, "reward": 30, "info": "The dragon noticed your gift..."},
+    "34": { "localization": 57, "reward": 35, "info": "You used your tools to make shoes"},
+    "35": { "localization": 41, "reward": 36, "info": "The King is impressed by your shoes"}
+}
