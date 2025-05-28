@@ -1,0 +1,30 @@
+[OK]	1. wprowadzanie komunikatów (1p)
+		- komunikaty wpisywane z klawiatury (zatwierdzanie Enterem)
+		- rozpoznanie co najmniej trzech komunikatów (co najmniej informacja w konsoli)
+		- wyglad prompta, jego zachwanie (brak możliwości "wyjścia")
+		- po wejściu do gry domyślnie wpisuje duże znaki (caps/shift - ewentualna zmiana)
+
+[OK]	2. mapa, ruch (1p)	
+		- możliwość przechodzenia po dostępnych lokalizacjach (E/W/N/S), pokazywanie odpowiedniej grafiki i nazw lokalizacji
+		- pokazanie odpowiednich kierunków na kompasie + "You can go"
+
+	3. przemieszczanie przedmiotów (max 1.5p)
+[OK]	(0.5p)	- rozmieszczone przedmioty początkowe - "You see"
+[OK]	(1p)	- działanie polecenia T(TAKE) / D(DROP) - "You see" + "You are carrying" (z obostrzeniami)
+
+[OK]	4. komunikaty (1p)	
+		- pokazywanie odpowiednich komunikatów co najmniej trzech poleceń (np. przy przechodzeniu po lokalizacjach, use, vocabulary itp.)
+		- co najmniej dwa wybrane komunikaty "z timeoutem" (np. próba wejścia na lokację za smokiem)
+
+	5. logika gry (max 2.5p)
+[OK]	(1p)	- polecenie U(USE) (odpowiedni komunikat, uzyskanie przedmiotów - doprowadzenie do conajmniej jednej części owcy)
+[OK]	(1.5p)	- oprogramowanie wszystkich zależności (przedmioty) doprowadzających do ukończenia gry, możliwość ukończenia gry (bez "oszustw") - cała logika działa
+			
+[OK]	6. dodatki (0.5p)
+		- czołówka, instrukcja gry
+		- hejnał
+		- polecenia V(VOCABULARY), G(GOSSIPS)
+
+[OK]	7. Projekt podzielony na moduły (0.5p)
+
+SUMA PUNKTÓW: 8

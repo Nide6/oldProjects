@@ -1,0 +1,100 @@
+@font-face {
+    font-family: dratwaFont;
+    src: url(./fonts/PressStart2P.ttf);
+}
+body{
+    background-color: black;
+    color: white;
+}
+*{
+    font-family: dratwaFont;
+    margin:0px
+}
+#container{
+    display: flex;
+}
+#input{
+    border: none;
+    outline: none;
+    background-color: black;
+    color: black;
+    width:1px
+}
+#vocabulary{
+    display:none
+}
+#gossips{
+    display:none
+}
+img{
+    width:200px
+}
+.horizontal{
+    display: flex;
+    align-items: end;
+    position: relative;
+}
+.hider{
+    position: absolute;
+    width:10px;
+    height: 10px;
+    background-color: black;
+}
+#north{
+    left:90px;
+    top: 0px
+}
+#east{
+    left:178px;
+    bottom: 58px
+}
+#south{
+    left:94px;
+    bottom: 4px
+}
+#west{
+    left:12px;
+    bottom: 58px
+}
+#img{
+    border:1px solid ghostwhite
+}
+.startImg{
+    width:100%;
+    position: absolute;
+    top:0px;
+    /* display:none */
+}
+#gameContent{
+    margin:4px
+}
+
+#startImg1{
+    z-index: 3;
+}
+#startImg2{
+    z-index: 2;
+}
+#startImg3{
+    z-index: 1;
+}
+#compass{
+    position: relative;
+}
+.endImg{
+    width:100%;
+    position: relative;
+    top:0px;
+    display:none
+}
+.endText{
+    width:100%;
+    display:none;
+    text-align: center;
+    font-size: 30px;
+}
+#blinkingCursor{
+    width:10px;
+    height:16px;
+    background-color: white;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>dratewka</title>
+    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContent">
+        <div id="info"></div>
+        <div class="horizontal">
+            <img id="img">
+            <div id="compass">
+                <img src="./img/compass.bmp">
+                <div class="hider" id="south"></div>
+                <div class="hider" id="north"></div>
+                <div class="hider" id="west"></div>
+                <div class="hider" id="east"></div>
+            </div>
+        </div>
+        <div id="main">
+            <div id="directions"></div>
+            <div id="items"></div>
+            <div id="inventory"></div><br>
+            <div id="container">
+                <div id="dialog">What now?</div>
+                <input id="input" autofocus type="text">
+                <div id="inputValue"></div>
+                <div id="blinkingCursor"></div>
+            </div>
+            <div id="doing"></div>
+        </div>
+        <div id="vocabulary">
+            <div>
+                NORTH or N, SOUTH or S<br>
+                WEST or W, EAST or E<br>
+                TAKE (object) or T (object)<br>
+                DROP (object) or D (object)<br>
+                USE (object) or U (object)<br>
+                GOSSIPS or G, VOCABULARY or V<br>
+                Press any key
+            </div>
+        </div>
+        <div id="gossips">
+            <div>
+                The  woodcutter lost  his home key...<br>
+                The butcher likes fruit... The cooper<br>
+                is greedy... Dratewka plans to make a<br>
+                poisoned  bait for the dragon...  The<br>
+                tavern owner is buying food  from the<br>
+                pickers... Making a rag from a bag...<br>
+                Press any key
+            </div>
+        </div>
+    </div>
+    <img class="startImg" id="startImg1" src="./img/start.jpg">
+    <img class="startImg" id="startImg2" src="./img/beginning_A.jpg">
+    <img class="startImg" id="startImg3" src="./img/beginning_B.jpg">
+    <div class="endText" id="endText">congratulations on finishing the game</div>
+</body>
+</html>
