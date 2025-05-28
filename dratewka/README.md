@@ -3,4 +3,4 @@
 You can't skip the introduction.  
 After intro you can use "V" and then enter to see controls.
 
-Images and sounds that I've used were provided by my teacher.
+The images and sounds I used were provided by my teacher.
