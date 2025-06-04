@@ -1,5 +1,5 @@
 # map generator
-### Language: TypeScript<br/>A project I've made in 2024, allows you to create map using a provided sprite.
+### Language: TypeScript<br/>A project I've made as a school project in 2024, allows you to create map using a provided sprite.
 
 To run it, use "npm run dev" in mapGenerator directory
 
